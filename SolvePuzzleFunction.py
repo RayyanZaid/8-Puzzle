@@ -1,7 +1,7 @@
 from typing import List
 
 
-def solve_puzzle(initialBoard : List[str] , algorithmNumber : int):
+def solve_puzzle(initialBoard : List[List[str]] , algorithmNumber : int):
 
     # variables that need to be returned 
 
