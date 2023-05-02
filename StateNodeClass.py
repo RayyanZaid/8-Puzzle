@@ -16,14 +16,7 @@ class StateNode:
 
 
 
-def findStar(board : List[List[str]], numRows, numCols) -> Tuple[int, int]:
-    
-    for i in range(numRows):
-        for j in range(numCols):
-            if board[i][j] == "*":
-                return (i,j)
-    
-    return (-1,-1) # will never run
+
     
 
 
@@ -33,6 +26,15 @@ def expand(stateNode : StateNode) -> List[StateNode]:
     numRows = len(board)
     numCols = len(board[0])
 
+    def findStar(board : List[List[str]], numRows, numCols) -> Tuple[int, int]:
+    
+        for i in range(numRows):
+            for j in range(numCols):
+                if board[i][j] == "*":
+                    return (i,j)
+        
+        return (-1,-1) # will never run
+    
     (starRowIndex, starColIndex) = findStar(board,numRows,numCols)
 
                         #   up   right  down   left
