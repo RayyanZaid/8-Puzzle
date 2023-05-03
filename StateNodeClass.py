@@ -38,7 +38,8 @@ class StateNode:
                 
                 count+=1
 
-
+    def __lt__(self,other):
+        return self.hn <= other.hn
 
     
 
