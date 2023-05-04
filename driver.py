@@ -2,9 +2,17 @@ from typing import List
 from SolvePuzzleFunction import solve_puzzle
 
 
-intialBoard : List[List[str]] = [["1" , "2" , "3"], 
-                                 ["4" , "5" , "6"], 
-                                 ["7" , "8" , "*"]]
-algorithmNumber = 1
-print(solve_puzzle(intialBoard, algorithmNumber))
+initialBoard : List[str] = []
+
+print("Enter your custom puzzle!")
+
+for i in range(9):
+    item = input("Enter item #{}: ".format(i+1))
+    initialBoard.append(item)
+
+print("Enter which algorithm you want: 1 = Uniform Cost Search, 2 = Misplaced Tile heuristic, and 3 = Euclidean Distance heuristic")
+algorithmNumber = input()
+
+
+print(solve_puzzle(initialBoard, algorithmNumber))
 
