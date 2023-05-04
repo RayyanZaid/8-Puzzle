@@ -1,8 +1,8 @@
 from typing import List
 from StateNodeClass import StateNode
 
-def returnListOfStates(node: StateNode) -> List[List[str]]:
-    listOfStates = []
+def returnListOfStates(node: StateNode) -> List[List[List[str]]]:
+    listOfStates : List[List[List[str]]] = [[[]]]
     
 
 
@@ -15,7 +15,7 @@ def returnListOfStates(node: StateNode) -> List[List[str]]:
 
     trace_back_to_uppermost_parent(node)
 
-    print(listOfStates)
+
     return listOfStates
 
 

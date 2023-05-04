@@ -5,14 +5,14 @@ import math
 
 
 class StateNode:
-    def __init__(self, board2DArray: List[List[str]], parent, initialStateMap, algorithmNumber) -> None:
+    def __init__(self, board2DArray: List[List[str]], parent, initialStateMap, algorithmNumber, depth: int) -> None:
         self.board2DArray = board2DArray
         self.parent = parent
 
 
-        self.gn = distanceFromStart(self.board2DArray, initialStateMap)   # cost from start
+        self.gn = depth   # cost from start
         self.hn : float     # PREDICTED cost until end
-
+        self.depth = depth
         if(algorithmNumber == 1):
             self.hn = 0
         
@@ -39,47 +39,12 @@ class StateNode:
                 count+=1
 
     def __lt__(self,other):
-        return self.hn <= other.hn
+        return self.fn <= other.fn
 
     
 
 
-def expand(stateNode : StateNode) -> List[StateNode]:
-    board = stateNode.board2DArray
-    
-    numRows = len(board)
-    numCols = len(board[0])
 
-    def findStar(board : List[List[str]], numRows, numCols) -> Tuple[int, int]:
-    
-        for i in range(numRows):
-            for j in range(numCols):
-                if board[i][j] == "0":
-                    return (i,j)
-        
-        return (-1,-1) # will never run
-    
-    (starRowIndex, starColIndex) = findStar(board,numRows,numCols)
-
-                        #   up   right  down   left
-    indicesToMoveStar = [[0,-1],[1,0],[0,1], [-1,0]]
-
-    arrayOfChildren = []
-
-    for i in range(4):
-
-        newStarRowIndex = starRowIndex + indicesToMoveStar[i][0]
-        newStarColIndex = starColIndex + indicesToMoveStar[i][1]
-
-        if 0 <= newStarRowIndex < numRows and 0 <= newStarColIndex < numCols:
-            numberSwitched = board[newStarRowIndex][newStarColIndex]
-            newBoard = copy.deepcopy(board)  # create a new copy of board
-            newBoard[starRowIndex][starColIndex] = numberSwitched
-            newBoard[newStarRowIndex][newStarColIndex] = "0"
-
-            arrayOfChildren.append(newBoard)
-    
-    return arrayOfChildren
 
 def misplacedTileHeuristic(board : List[List[str]]):
 
