@@ -35,7 +35,7 @@ def solve_puzzle(initialBoard : List[str] , algorithmNumber : int):
         if(nodes.empty()):
             return False
         
-        maxNumberOfNodesInQueue = max(maxNumberOfNodesInQueue,nodes.qsize())
+        
         currentNode = nodes.get()
 
         visitedSet.add(tuple(map(tuple, currentNode.board2DArray)))
@@ -47,6 +47,7 @@ def solve_puzzle(initialBoard : List[str] , algorithmNumber : int):
 
         if(currentNode.isGoalState()):
             depthOfGoal = currentNode.depth
+            maxNumberOfNodesInQueue = max(maxNumberOfNodesInQueue,nodes.qsize())
             return (numberOfNodesExpanded, maxNumberOfNodesInQueue, depthOfGoal, currentNode)
         
         
@@ -56,6 +57,8 @@ def solve_puzzle(initialBoard : List[str] , algorithmNumber : int):
             newNode = StateNode(eachNode,currentNode,initialStateMap,algorithmNumber,currentNode.depth + 1)
             nodes.put(newNode)
         
+        maxNumberOfNodesInQueue = max(maxNumberOfNodesInQueue,nodes.qsize())
+
         bestStateNode = nodes.queue[0]
         bestStateGn = bestStateNode.gn
         bestStateHn = bestStateNode.hn
@@ -131,7 +134,7 @@ for eachState in list_of_states:
 print("Very Easy")
 result = solve_puzzle([["1","2","3"],
                    ["4","5","6"],
-                   ["7","0","8"]],3)
+                   ["7","0","8"]],2)
 
 
 print(f"To solve this problem, the search algorithm expanded a total of {result[0]} nodes.")
@@ -150,7 +153,7 @@ for eachState in list_of_states:
 print("EASY")
 result = solve_puzzle([["1","2","0"],
                    ["4","5","3"],
-                   ["7","8","6"]],3)
+                   ["7","8","6"]],2)
 
 
 print(f"To solve this problem, the search algorithm expanded a total of {result[0]} nodes.")
@@ -187,7 +190,7 @@ for eachState in list_of_states:
 print("OH BOY")
 result = solve_puzzle([["8","7","1"],
                    ["6","0","2"],
-                   ["5","4","3"]],3)
+                   ["5","4","3"]],2)
 
 
 print(f"To solve this problem, the search algorithm expanded a total of {result[0]} nodes.")
