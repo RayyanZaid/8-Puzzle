@@ -11,7 +11,7 @@ class StateNode:
 
 
         self.gn = depth   # cost from start
-        self.hn : float     # PREDICTED cost until end
+        self.hn = 0     # PREDICTED cost until end
         self.depth = depth
         if(algorithmNumber == 1):
             self.hn = 0
