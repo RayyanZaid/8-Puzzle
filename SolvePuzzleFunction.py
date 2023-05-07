@@ -26,6 +26,7 @@ def solve_puzzle(initialBoard : List[str] , algorithmNumber : int):
     
 
     initialState = StateNode(twoDimArray,None, initialStateMap, algorithmNumber, 0)
+    initialState.set_HnAndFn(algorithmNumber)
     print("Expanding state")
     print(twoDimArray)
     nodes = queue.PriorityQueue()
@@ -33,10 +34,11 @@ def solve_puzzle(initialBoard : List[str] , algorithmNumber : int):
 
     while not nodes.empty():
         if(nodes.empty()):
-            return False
+            return (False, False, False, False)
         
-        
+        # print(nodes.qsize())
         currentNode = nodes.get()
+        # print(nodes.qsize())
 
         visitedSet.add(tuple(map(tuple, currentNode.board2DArray)))
 
@@ -55,10 +57,13 @@ def solve_puzzle(initialBoard : List[str] , algorithmNumber : int):
         numberOfNodesExpanded += 1
         for eachNode in newNodes:
             newNode = StateNode(eachNode,currentNode,initialStateMap,algorithmNumber,currentNode.depth + 1)
+            newNode.set_HnAndFn(algorithmNumber)
             nodes.put(newNode)
         
         maxNumberOfNodesInQueue = max(maxNumberOfNodesInQueue,nodes.qsize())
 
+        if(nodes.empty()):
+            return (False, False, False, False)
         bestStateNode = nodes.queue[0]
         bestStateGn = bestStateNode.gn
         bestStateHn = bestStateNode.hn

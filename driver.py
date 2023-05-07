@@ -27,9 +27,8 @@ if(isSolved):
     for eachState in list_of_states:
         print(eachState)
         print()
-
-   
-
+else:
+    print("Sad day :(")
 
 
 

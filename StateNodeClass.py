@@ -11,16 +11,9 @@ class StateNode:
 
 
         self.gn = depth   # cost from start
-        self.hn = 0     # PREDICTED cost until end
+        self.hn = 0    # PREDICTED cost until end
         self.depth = depth
-        if(algorithmNumber == 1):
-            self.hn = 0
         
-        if(algorithmNumber == 2):
-            self.hn = misplacedTileHeuristic(self.board2DArray)
-        
-        if(algorithmNumber == 3):
-            self.hn = euclideanDistanceHeuristic(self.board2DArray)
 
         self.fn = self.gn + self.hn    # total cost
 
@@ -37,6 +30,15 @@ class StateNode:
                     return False
                 
                 count+=1
+
+    def set_HnAndFn(self,algorithmNumber):
+        if(algorithmNumber == "2"):
+            self.hn = misplacedTileHeuristic(self.board2DArray)
+        
+        if(algorithmNumber == "3"):
+            self.hn = euclideanDistanceHeuristic(self.board2DArray)
+        
+        self.fn = self.gn + self.hn
 
     def __lt__(self,other):
         return self.fn <= other.fn
